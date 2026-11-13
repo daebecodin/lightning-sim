@@ -1,0 +1,16 @@
+{
+  "name": "lightning-ride",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ride a simulated lightning leader from cloud to ground. C++ (WebAssembly) simulation, three.js rendering.",
+  "scripts": {
+    "dev": "node serve.mjs .",
+    "build": "node build.mjs",
+    "build:cdn": "node build.mjs --three-cdn",
+    "preview": "node serve.mjs ../dist"
+  },
+  "devDependencies": {
+    "esbuild": ">=0.21.0"
+  }
+}

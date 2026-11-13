@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stepped Leader: ride a lightning bolt</title>
+  <meta name="description" content="Ride a simulated lightning leader from a thundercloud to the prairie. C++ dielectric breakdown model in WebAssembly, rendered with three.js.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23070a12'/%3E%3Cpath d='M9 1 4 9h3l-1 6 6-9H8z' fill='%23a9c4ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <canvas id="view" aria-label="Lightning simulation view"></canvas>
+  <div id="vignette" aria-hidden="true"></div>
+
+  <section id="veil" aria-live="polite">
+    <div class="veil-inner">
+      <p class="eyebrow">Dielectric breakdown simulation</p>
+      <h1>Stepped Leader</h1>
+      <p class="lede">Ride a lightning leader from the inside of a thundercloud down to the prairie. Twenty-eight seconds, one shot.</p>
+      <div id="prep" class="prep">
+        <div class="bar"><div id="prep-fill" class="fill"></div></div>
+        <p id="prep-label" class="prep-label">Starting the simulation</p>
+      </div>
+      <button id="start" class="start" type="button" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
+        <span id="start-label">Play</span>
+      </button>
+      <p class="note">Sound starts when you press Play. The return stroke is one bright flash.</p>
+      <p id="error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <footer id="hud" class="hud">
+    <div id="scrub" class="scrub" aria-hidden="true"><div id="scrub-fill" class="scrub-fill"></div><div class="scrub-mark" id="scrub-mark"></div></div>
+    <div class="row">
+      <div class="group">
+        <button id="play" class="icon" type="button" aria-label="Play" title="Play or pause (Space)">
+          <svg id="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z"/></svg>
+        </button>
+        <button id="restart" class="icon" type="button" aria-label="Restart" title="Restart (R)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.6 4.7l1.9.7A5 5 0 1 0 12 7v3L7.5 6 12 2z"/></svg>
+        </button>
+        <span id="clock" class="clock">0.0 / 28.0</span>
+        <span id="phase" class="phase"></span>
+      </div>
+      <div class="group">
+        <label class="field" title="Each seed grows a different bolt. The same seed always grows the same one.">
+          <span>Seed</span>
+          <input id="seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric">
+        </label>
+        <button id="reseed" class="text" type="button" title="Pick a random seed">New bolt</button>
+        <label class="field">
+          <span>Quality</span>
+          <select id="quality">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <button id="mute" class="icon" type="button" aria-label="Mute sound" aria-pressed="false" title="Sound (M)">
+          <svg id="icon-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15 8.5a5 5 0 0 1 0 7l-1.2-1.2a3.3 3.3 0 0 0 0-4.6zM17.6 6a8.5 8.5 0 0 1 0 12l-1.2-1.2a6.8 6.8 0 0 0 0-9.6z"/></svg>
+          <svg id="icon-muted" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM14.4 9.4l1.2-1.2 2 2 2-2 1.2 1.2-2 2 2 2-1.2 1.2-2-2-2 2-1.2-1.2 2-2z"/></svg>
+        </button>
+      </div>
+    </div>
+    <p id="simstats" class="simstats"></p>
+  </footer>
+
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>
