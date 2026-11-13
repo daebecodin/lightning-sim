@@ -19,6 +19,8 @@ python3 -m http.server 8080 --directory dist
 
 Open it over `http://`, not `file://` (browsers refuse to load WebAssembly and module workers from `file://`).
 
+To host the site at [daebecodin.github.io/lightning-sim](https://daebecodin.github.io/lightning-sim/), open the repository's **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. The Pages workflow publishes the checked-in `dist/` folder when it changes on `main`. To publish source changes, rebuild with `cd web && npm run build`, then commit and push the updated `dist/` files.
+
 Controls: Play / Pause (Space), Restart (R), sound on or off (M), a seed field, "New bolt" for a random seed, and a quality selector. `?seed=42&q=high` in the URL sets the starting seed and quality.
 
 ## Important: which toolchain built the shipped `.wasm`
